@@ -10,6 +10,17 @@ from ossapi import (
 )
 from datetime import date, datetime, timedelta, timezone
 from discord import Embed
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv(".env")
+clientid = os.getenv("CLIENT_ID")
+clientsecret = os.getenv("CLIENT_SECRET")
+callbackurl = os.getenv("CALLBACK_URL")
+
+# if clientid or clientsecret or callbackurl is None:
+#     raise ValueError("Token not found check the .env file")
 
 
 client_id = 38046
@@ -147,12 +158,13 @@ def get_user_info(user):
 def user_embedder(x):
     embed = Embed(
         description=f"**Bancho Rank**:#{x[3]} ({x[5]}#{x[4]})\n"
-        f"level:{x[8]} progress:{x[9]}\n"
-        f"PP:{x[10]} acc:{x[11]}\n"
-        f"badges: {x[14]}\n"
-        f"SS:{x[15]} SSH:{x[16]} S:{x[17]} SH:{x[18]} A:{x[19]}"
+        f"**level:**{x[8]} %{x[9]}\n"
+        f"**pp:**{x[10]} **acc:**{x[11]}\n"
+        f"**badges:** {x[14]}\n"
+        f"**SS:**{x[15]} **SSH:**{x[16]} **S:**{x[17]} **SH:**{x[18]} **A:**{x[19]}"
     )
     embed.set_author(name=f"{x[0]}", url=x[1], icon_url=x[2])
+    embed.set_thumbnail(url=x[13])
     return embed
 
 
