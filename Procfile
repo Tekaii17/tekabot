@@ -1,1 +1,1 @@
-web: python tekabot.py
+web: python dcpy/tekabot.py
