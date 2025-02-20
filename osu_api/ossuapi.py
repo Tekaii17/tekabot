@@ -23,9 +23,9 @@ callbackurl = os.getenv("CALLBACK_URL")
 #     raise ValueError("Token not found check the .env file")
 
 
-client_id = 38046
-client_secret = "OqOJNzxWdsb67mN4EREGebQQSx9vewCmBNSFoKEx"
-callback_url = "http://localhost:4378/"
+client_id = clientid
+client_secret = clientsecret
+callback_url = callbackurl
 scopes = [Scope.PUBLIC, Scope.FRIENDS_READ, Scope.IDENTIFY]
 api = Ossapi(client_id, client_secret, callback_url, scopes=scopes)
 
