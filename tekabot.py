@@ -47,3 +47,4 @@ async def osu(ctx, arg: str = None):
 
 
 bot.run(TOKEN)
+# sjrlfnsrjsnr
