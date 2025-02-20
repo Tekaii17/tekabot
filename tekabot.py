@@ -20,7 +20,7 @@ def get_token():
     return token
 
 
-TOKEN: str = get_token()
+TOKEN: str = "MTMzNzA0OTI3MTM0NTc0MTg4NA.GDcPi6.dCWf7hdgfPTFh-qDXjWUkx8u8-DPteRW3onlPQ"
 
 intents = discord.Intents.default()
 intents.message_content = True
