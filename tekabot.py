@@ -46,4 +46,5 @@ async def osu(ctx, arg: str = None):
         await ctx.send(embed=get_user(arg))
 
 
-bot.run(TOKEN)
+if __name__ == "__main__":
+    bot.run(TOKEN)
