@@ -14,18 +14,14 @@ from dotenv import load_dotenv
 import os
 
 
-load_dotenv(".env")
-clientid = os.getenv("CLIENT_ID")
-clientsecret = os.getenv("CLIENT_SECRET")
-callbackurl = os.getenv("CALLBACK_URL")
+load_dotenv()
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
+callback_url = os.getenv("CALLBACK_URL")
 
 # if clientid or clientsecret or callbackurl is None:
 #     raise ValueError("Token not found check the .env file")
 
-
-client_id = clientid
-client_secret = clientsecret
-callback_url = callbackurl
 scopes = [Scope.PUBLIC, Scope.FRIENDS_READ, Scope.IDENTIFY]
 api = Ossapi(client_id, client_secret, callback_url, scopes=scopes)
 
@@ -125,6 +121,8 @@ def get_user_info(user):
     usravatarurl = user.avatar_url
     website = f"https://osu.ppy.sh/users/{user.id}/"
     badges = len(user.badges)
+    playcount = user.statistics.play_count
+    playtime = user.statistics.play_time
     ss = user.statistics.grade_counts.ss
     ssh = user.statistics.grade_counts.ssh
     s = user.statistics.grade_counts.s
@@ -152,16 +150,19 @@ def get_user_info(user):
         s,
         sh,
         a,
+        playcount,  # 20
+        playtime,  # 21
     )
 
 
 def user_embedder(x):
     embed = Embed(
         description=f"**Bancho Rank**:#{x[3]} ({x[5]}#{x[4]})\n"
-        f"**level:**{x[8]} %{x[9]}\n"
+        f"**level:**{x[8]}+%{x[9]}\n"
         f"**pp:**{x[10]} **acc:**{x[11]}\n"
         f"**badges:** {x[14]}\n"
-        f"**SS:**{x[15]} **SSH:**{x[16]} **S:**{x[17]} **SH:**{x[18]} **A:**{x[19]}"
+        f"**playcount:** {x[20]} **playtime:** ({(x[21]/60)/60}hrs)\n"
+        f"**SS:** {x[15]} **SSH:** {x[16]} **S:** {x[17]} **SH:** {x[18]} **A:** {x[19]}"
     )
     embed.set_author(name=f"{x[0]}", url=x[1], icon_url=x[2])
     embed.set_thumbnail(url=x[13])
